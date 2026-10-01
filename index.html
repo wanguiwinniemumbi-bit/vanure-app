@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vanure</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Montserrat:wght@400;500;600&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F9F6F0;--ink:#2A2A2A;--bd:#E2DACD;--b1:#58111A;--b2:#721C28;--rose:#E0A9A4;--pale:#F1D6D2;--card:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px)}
+:root:not([data-theme="light"]){}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:#EFE9DF;color:var(--ink);font:400 14px/1.5 Montserrat,Tajawal,sans-serif}
+[dir=rtl] body{font-family:Tajawal,Montserrat,sans-serif}
+button{font:inherit;cursor:pointer;color:inherit}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--b2);outline-offset:2px}
+#app{max-width:480px;height:100%;margin:0 auto;background:var(--bg);display:flex;flex-direction:column;position:relative;overflow:hidden}
+main{flex:1;overflow-y:auto;padding:16px 18px 24px}
+h1,h2,h3{font-family:Cinzel,Tajawal,serif;font-weight:600;color:var(--b1);margin:0;letter-spacing:.04em}
+[dir=rtl] h1,[dir=rtl] h2,[dir=rtl] h3{font-family:Tajawal,serif;letter-spacing:0}
+h2{font-size:22px;margin-bottom:4px}
+.muted{color:#6d655b;font-size:13px}
+.top{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;border-bottom:1px solid var(--bd)}
+.word{font:600 18px Cinzel,serif;letter-spacing:.3em;color:var(--b1);display:flex;gap:8px;align-items:center}
+.lang{border:1px solid var(--bd);background:none;padding:4px 10px;border-radius:2px;font-size:12px}
+nav{display:flex;border-top:1px solid var(--bd);background:var(--bg);padding-bottom:env(safe-area-inset-bottom,0px)}
+nav button{flex:1;border:0;background:none;padding:12px 4px;font-size:12px;color:#7b7268;border-top:2px solid transparent}
+nav button.on{color:var(--b1);border-top-color:var(--b1);font-weight:600}
+.seg{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--b1);margin:14px 0}
+.seg button{border:0;background:none;padding:12px 6px;color:var(--b1);font-weight:500}
+.seg button.on{background:var(--b1);color:var(--bg)}
+.feed{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.look{background:var(--card);border:1px solid var(--bd);border-radius:2px;text-align:start;padding:0;overflow:hidden;display:flex;flex-direction:column}
+.look .img{aspect-ratio:4/5;display:flex;align-items:flex-end;padding:8px;color:#fff;font-size:11px}
+.look .tx{padding:10px}
+.look b{display:block;font-weight:600;font-size:13px;line-height:1.3}
+.look .tx span{font-size:12px;color:#6d655b}
+.cta{background:var(--b1);color:var(--bg);border:0;padding:13px 18px;width:100%;font-weight:600;letter-spacing:.04em;border-radius:2px}
+.cta:hover{background:var(--b2)}
+.cta[disabled]{opacity:.45;cursor:not-allowed}
+.ghost{background:none;border:1px solid var(--b1);color:var(--b1);padding:9px 14px;border-radius:2px}
+.back{background:none;border:0;color:var(--b2);padding:0 0 10px;font-weight:500}
+.hero{aspect-ratio:16/10;margin:8px 0 14px;display:flex;align-items:flex-end;padding:14px;color:#fff;font:600 20px Cinzel,Tajawal,serif}
+.prov{display:flex;gap:12px;background:var(--card);border:1px solid var(--bd);padding:12px;margin-bottom:10px;width:100%;text-align:start;border-radius:2px}
+.prov.on{border-color:var(--b1);box-shadow:inset 0 0 0 1px var(--b1)}
+.logo{width:48px;height:48px;background:var(--b1);color:var(--bg);display:grid;place-items:center;font:600 18px Cinzel,serif;flex:none}
+.grow{flex:1}
+.price{font-weight:600;color:var(--b1);white-space:nowrap}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 16px}
+.chip{border:1px solid var(--bd);background:var(--card);padding:8px 12px;border-radius:2px;font-size:13px}
+.chip.on{background:var(--b1);color:var(--bg);border-color:var(--b1)}
+.chip[disabled]{opacity:.35;text-decoration:line-through;cursor:not-allowed}
+label{display:block;font-weight:500;margin:12px 0 4px;font-size:13px}
+input,textarea{width:100%;border:1px solid var(--bd);background:#fff;padding:11px;font:inherit;border-radius:2px}
+.err{color:#a3262f;font-size:12px;margin-top:4px}
+.banner{background:#fff;border:1px solid var(--bd);border-inline-start:3px solid var(--b1);padding:12px;margin:12px 0;font-size:13px}
+.row{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--bd);font-size:13px}
+.code{font:600 26px Cinzel,serif;color:var(--b1);letter-spacing:.12em;text-align:center;margin:12px 0}
+.st{font-size:12px;padding:2px 8px;border:1px solid;border-radius:2px;font-weight:600}
+.st.pending{color:#8a5a00}.st.confirmed{color:#1e6b3c}.st.cancelled{color:#a3262f}.st.noshow{color:#555}
+.bk{background:#fff;border:1px solid var(--bd);padding:12px;margin-bottom:10px}
+.splash{position:absolute;inset:0;background:var(--b1);display:grid;place-content:center;justify-items:center;gap:18px;z-index:9;transition:opacity .6s}
+.splash .word{color:var(--bg);font-size:26px}
+.splash.out{opacity:0;pointer-events:none}
+.toast{position:absolute;bottom:76px;inset-inline:18px;background:var(--b1);color:#fff;padding:11px 14px;font-size:13px;z-index:5}
+@media (prefers-reduced-motion:reduce){.splash{transition:none}}
+</style>
+</head>
+<body>
+<div id="app" dir="ltr"></div>
+<script>
+const LOGO=(s=36,c=['#7F2434','#E0A9A4','#F1D6D2'])=>`<svg width="${s}" height="${s}" viewBox="0 0 100 100" aria-hidden="true"><path fill="${c[0]}" d="M2 6h18q9 0 13 9l27 58q4 9-3 21L2 6z"/><path fill="${c[1]}" d="M44 6h13q8 0 11 8l12 28q4 10-1 19L67 82z" opacity=".95"/><path fill="${c[2]}" d="M80 6h9q8 0 10 10 1 11-4 20L88 52z"/></svg>`;
+const T={en:{home:'Home',explore:'Explore',bookings:'Bookings',profile:'Profile',f:'Female Salon & Care',m:'Male Grooming & Care',tag:'Investing in your desired look',disc:'Discover your look',book:'Book this look',back:'Back',choose:'Choose a provider',date:'Select date',time:'Select time',you:'Your details',name:'Full name',phone:'Mobile number',notes:'Notes (optional)',send:'Send booking request',sending:'Sending booking request...',fail:"We couldn't submit your booking. Please try again.",sent:'Booking request sent',sentx:'Your request has been sent to the provider. They will confirm it shortly.',ref:'Booking reference',svc:'Service',prov:'Provider',dt:'Date',tm:'Time',cust:'Customer',status:'Status',none:'No bookings yet. Book a look to see it here.',cancel:'Cancel booking',st:{pending:'Pending',confirmed:'Confirmed',cancelled:'Cancelled',noshow:'No Show'},nameE:'Enter your full name.',phoneE:'Enter a valid mobile number (8 digits or more).',pickE:'Choose a date and a time.',from:'From',qar:'QAR',avail:'Available',rating:'New',lookup:'Find a booking by reference',find:'Find',nf:'No booking found for that reference.',prof:'Guest mode. Bookings are saved on this device. Accounts are coming later.',ex:'All looks',done:'Back to home',cancelled:'Booking cancelled.'},
+ar:{home:'الرئيسية',explore:'استكشف',bookings:'حجوزاتي',profile:'حسابي',f:'صالون وعناية نسائية',m:'حلاقة وعناية رجالية',tag:'استثمر في إطلالتك',disc:'اكتشف إطلالتك',book:'احجز هذه الإطلالة',back:'رجوع',choose:'اختر مقدم الخدمة',date:'اختر التاريخ',time:'اختر الوقت',you:'بياناتك',name:'الاسم الكامل',phone:'رقم الجوال',notes:'ملاحظات (اختياري)',send:'أرسل طلب الحجز',sending:'جارٍ إرسال طلب الحجز...',fail:'تعذّر إرسال الحجز. حاول مرة أخرى.',sent:'تم إرسال طلب الحجز',sentx:'تم إرسال طلبك إلى مقدم الخدمة وسيؤكده قريبًا.',ref:'رقم الحجز',svc:'الخدمة',prov:'مقدم الخدمة',dt:'التاريخ',tm:'الوقت',cust:'العميل',status:'الحالة',none:'لا توجد حجوزات بعد. احجز إطلالة لتظهر هنا.',cancel:'إلغاء الحجز',st:{pending:'قيد الانتظار',confirmed:'مؤكد',cancelled:'ملغي',noshow:'لم يحضر'},nameE:'أدخل اسمك الكامل.',phoneE:'أدخل رقم جوال صحيح (8 أرقام أو أكثر).',pickE:'اختر التاريخ والوقت.',from:'ابتداءً من',qar:'ر.ق',avail:'متاح',rating:'جديد',lookup:'ابحث عن حجز برقم الحجز',find:'بحث',nf:'لا يوجد حجز بهذا الرقم.',prof:'وضع الضيف. الحجوزات محفوظة على هذا الجهاز. الحسابات قريبًا.',ex:'كل الإطلالات',done:'العودة للرئيسية',cancelled:'تم إلغاء الحجز.'}};
+const LOOKS=[
+{id:1,g:'f',en:'Soft Balayage',ar:'بالياج ناعم',cat:{en:'Hair coloring',ar:'صبغ الشعر'},svc:{en:'Balayage & gloss',ar:'بالياج ولمعان'},p:650,c:['#8a4a3a','#d9a27e']},
+{id:2,g:'f',en:'Boho Knotless Braids',ar:'جدائل بوهو',cat:{en:'Braids',ar:'جدائل'},svc:{en:'Knotless braids',ar:'جدائل بدون عقد'},p:480,c:['#58111A','#b3574f']},
+{id:3,g:'f',en:'Nude Chrome Nails',ar:'أظافر كروم نود',cat:{en:'Nails',ar:'أظافر'},svc:{en:'Gel manicure + chrome',ar:'مانيكير جل وكروم'},p:180,c:['#c9a39a','#f1d6d2']},
+{id:4,g:'f',en:'Classic Lash Set',ar:'رموش كلاسيك',cat:{en:'Eyelashes',ar:'رموش'},svc:{en:'Lash extensions',ar:'تركيب رموش'},p:320,c:['#3b2a2a','#8c6a66']},
+{id:5,g:'f',en:'Glow Facial',ar:'فيشل النضارة',cat:{en:'Skincare',ar:'عناية بالبشرة'},svc:{en:'Hydrating facial',ar:'فيشل ترطيب'},p:400,c:['#a8544c','#f0c9c0']},
+{id:6,g:'m',en:'Low Fade + Beard',ar:'فيد منخفض مع لحية',cat:{en:'Haircut',ar:'قصة شعر'},svc:{en:'Fade & beard trim',ar:'فيد وتهذيب لحية'},p:120,c:['#2A2A2A','#6b4b4b']},
+{id:7,g:'m',en:'Textured Crop',ar:'قصة كروب',cat:{en:'Haircut',ar:'قصة شعر'},svc:{en:'Cut & style',ar:'قص وتصفيف'},p:90,c:['#3a2f2f','#8a6d65']},
+{id:8,g:'m',en:'Sculpted Beard',ar:'لحية مهذبة',cat:{en:'Beard',ar:'لحية'},svc:{en:'Beard shaping + hot towel',ar:'تشكيل لحية ومنشفة ساخنة'},p:70,c:['#58111A','#2A2A2A']},
+{id:9,g:'m',en:'Classic Gentleman Cut',ar:'قصة كلاسيك',cat:{en:'Grooming',ar:'عناية'},svc:{en:'Cut, shave & style',ar:'قص وحلاقة وتصفيف'},p:150,c:['#4a3a32','#b79a84']}];
+const PROV=[
+{id:1,n:'Vanure Studio',loc:{en:'West Bay, Doha',ar:'الخليج الغربي، الدوحة'},g:'fm',off:0,slots:['10:00','11:30','14:00','16:30']},
+{id:2,n:'Luxe Beauty House',loc:{en:'The Pearl, Doha',ar:'اللؤلؤة، الدوحة'},g:'f',off:60,slots:['09:30','12:00','15:00','18:00']},
+{id:3,n:'Elite Grooming',loc:{en:'Lusail',ar:'لوسيل'},g:'m',off:20,slots:['10:00','13:00','17:00','19:30']},
+{id:4,n:'The Groom Room',loc:{en:'Al Sadd, Doha',ar:'السد، الدوحة'},g:'m',off:-10,slots:['11:00','12:30','16:00','20:00']}];
+const S={lang:'en',tab:'home',g:'f',look:null,prov:null,date:null,time:null,form:{name:'',phone:'',notes:''},errs:{},busy:false,done:null,toast:'',q:'',qres:undefined,splash:true,bookings:[]};
+try{S.bookings=JSON.parse(localStorage.getItem('vnr_bookings')||'[]')}catch(e){}
+const save=()=>{try{localStorage.setItem('vnr_bookings',JSON.stringify(S.bookings))}catch(e){}};
+const t=()=>T[S.lang];const L=o=>o[S.lang];
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const price=(l,p)=>l.p+p.off;
+const days=()=>Array.from({length:7},(_,i)=>{const d=new Date();d.setDate(d.getDate()+i+1);return d});
+const iso=d=>d.toISOString().slice(0,10);
+const fmt=d=>new Date(d+'T12:00').toLocaleDateString(S.lang==='ar'?'ar-QA':'en-GB',{weekday:'short',day:'numeric',month:'short'});
+const taken=(p,d,tm)=>S.bookings.some(b=>b.provId===p.id&&b.date===d&&b.time===tm&&b.status!=='cancelled')||((p.id*7+new Date(d).getDate()+tm.length*3+parseInt(tm))%5===0);
+const img=(l,cls,inner='')=>`<div class="${cls}" style="background:linear-gradient(150deg,${l.c[0]},${l.c[1]})">${inner}</div>`;
+const lookCard=l=>`<button class="look" data-act="look" data-id="${l.id}">${img(l,'img',esc(L(l.cat)))}<div class="tx"><b>${esc(L(l))}</b><span>${esc(L(l.svc))}</span><br><span class="price">${t().from} ${t().qar} ${l.p}</span></div></button>`;
+function toast(m){S.toast=m;render();setTimeout(()=>{S.toast='';render()},2600)}
+function home(){const list=LOOKS.filter(l=>l.g===S.g);return `<h2>${t().disc}</h2><div class="muted">${t().tag}</div><div class="seg"><button data-act="g" data-v="f" class="${S.g==='f'?'on':''}">${t().f}</button><button data-act="g" data-v="m" class="${S.g==='m'?'on':''}">${t().m}</button></div><div class="feed">${list.map(lookCard).join('')}</div>`}
+function explore(){return `<h2>${t().ex}</h2><div class="feed" style="margin-top:12px">${LOOKS.map(lookCard).join('')}</div>`}
+function providers(){const l=S.look;const ps=PROV.filter(p=>p.g.includes(l.g));return `<button class="back" data-act="close">${S.lang==='ar'?'→':'←'} ${t().back}</button>${img(l,'hero',esc(L(l)))}<div class="muted">${esc(L(l.cat))} · ${esc(L(l.svc))}</div><h3 style="margin:14px 0 10px">${t().choose}</h3>${ps.map(p=>`<button class="prov ${S.prov&&S.prov.id===p.id?'on':''}" data-act="prov" data-id="${p.id}"><div class="logo">${esc(p.n[0])}</div><div class="grow"><b>${esc(p.n)}</b><div class="muted">${esc(L(p.loc))} · ${t().rating}</div><div class="muted">${t().avail}: ${p.slots[0]}</div></div><div class="price">${t().qar} ${price(l,p)}</div></button>`).join('')}${S.prov?bookForm():''}`}
+function bookForm(){const p=S.prov,e=S.errs,f=S.form;return `<h3 style="margin:18px 0 4px">${t().date}</h3><div class="chips">${days().map(d=>`<button class="chip ${S.date===iso(d)?'on':''}" data-act="date" data-v="${iso(d)}">${fmt(iso(d))}</button>`).join('')}</div><h3>${t().time}</h3><div class="chips">${p.slots.map(s=>{const off=S.date&&taken(p,S.date,s);return `<button class="chip ${S.time===s?'on':''}" ${off?'disabled':''} data-act="time" data-v="${s}">${s}</button>`}).join('')}</div>${e.pick?`<div class="err">${t().pickE}</div>`:''}<h3 style="margin-top:14px">${t().you}</h3><label for="n">${t().name}</label><input id="n" data-f="name" autocomplete="name" value="${esc(f.name)}">${e.name?`<div class="err">${t().nameE}</div>`:''}<label for="p">${t().phone}</label><input id="p" data-f="phone" inputmode="tel" autocomplete="tel" value="${esc(f.phone)}" dir="ltr">${e.phone?`<div class="err">${t().phoneE}</div>`:''}<label for="o">${t().notes}</label><textarea id="o" data-f="notes" rows="2">${esc(f.notes)}</textarea>${e.api?`<div class="err">${t().fail}</div>`:''}<div style="margin-top:16px"><button class="cta" data-act="submit" ${S.busy?'disabled':''}>${S.busy?t().sending:t().send}</button></div>`}
+function confirm(){const b=S.done;return `<h2 style="margin-top:8px">${t().sent}</h2><div class="muted">${t().sentx}</div><div class="code">${b.code}</div><div class="banner">${t().ref}: <b>${b.code}</b></div>${rows(b)}<div style="margin-top:18px"><button class="cta" data-act="finish">${t().done}</button></div>`}
+const rows=b=>{const l=LOOKS.find(x=>x.id===b.lookId),p=PROV.find(x=>x.id===b.provId);return [[t().svc,L(l.svc)],[t().prov,p.n],[t().dt,fmt(b.date)],[t().tm,b.time],[t().cust,b.name],[t().status,`<span class="st ${b.status}">${t().st[b.status]}</span>`]].map(([k,v])=>`<div class="row"><span class="muted">${k}</span><span>${k===t().status?v:esc(v)}</span></div>`).join('')};
+function bookingsView(){const r=S.qres;const card=b=>{const l=LOOKS.find(x=>x.id===b.lookId);return `<div class="bk"><b>${esc(L(l))}</b> <span class="muted">${b.code}</span>${rows(b)}${b.status==='pending'?`<div style="margin-top:10px"><button class="ghost" data-act="cancel" data-v="${b.code}">${t().cancel}</button></div>`:''}</div>`};return `<h2>${t().bookings}</h2><label for="q">${t().lookup}</label><div style="display:flex;gap:8px"><input id="q" data-f="q" placeholder="VNR-00000" dir="ltr" value="${esc(S.q)}"><button class="ghost" data-act="find">${t().find}</button></div>${r===null?`<div class="err">${t().nf}</div>`:r?`<div style="margin-top:12px">${card(r)}</div>`:''}<div style="margin-top:16px">${S.bookings.length?S.bookings.map(card).join(''):`<div class="banner">${t().none}</div>`}</div>`}
+function profile(){return `<h2>${t().profile}</h2><div class="banner">${t().prof}</div>`}
+function render(){const a=document.getElementById('app');const keep=document.activeElement&&document.activeElement.id;const pos=(document.activeElement||{}).selectionStart;a.dir=S.lang==='ar'?'rtl':'ltr';document.documentElement.lang=S.lang;
+let body;if(S.done)body=confirm();else if(S.look&&(S.tab==='home'||S.tab==='explore'))body=providers();else body={home,explore,bookings:bookingsView,profile}[S.tab]();
+const nav=['home','explore','bookings','profile'].map(k=>`<button data-act="tab" data-v="${k}" class="${S.tab===k?'on':''}">${t()[k]}</button>`).join('');
+a.innerHTML=`<div class="splash ${S.splash?'':'out'}">${LOGO(84,['#F9F6F0','#E0A9A4','#F1D6D2'])}<div class="word">VANURE</div></div><div class="top"><div class="word">${LOGO(26)}VANURE</div><button class="lang" data-act="lang">${S.lang==='en'?'العربية':'English'}</button></div><main>${body}</main><nav>${nav}</nav>${S.toast?`<div class="toast" role="status">${esc(S.toast)}</div>`:''}`;
+if(keep){const el=document.getElementById(keep);if(el){el.focus();try{el.setSelectionRange(pos,pos)}catch(e){}}}}
+function reset(){S.look=null;S.prov=null;S.date=null;S.time=null;S.form={name:'',phone:'',notes:''};S.errs={};S.busy=false}
+const code=()=>{let c;do{c='VNR-'+(10000+Math.floor(Math.random()*90000))}while(S.bookings.some(b=>b.code===c));return c};
+// api layer: swap this for fetch('/api/bookings') when the backend exists
+const api={createBooking:b=>new Promise(r=>setTimeout(()=>r(b),900))};
+document.getElementById('app').addEventListener('input',e=>{const k=e.target.dataset.f;if(!k)return;if(k==='q')S.q=e.target.value;else S.form[k]=e.target.value});
+document.getElementById('app').addEventListener('click',async e=>{const el=e.target.closest('[data-act]');if(!el)return;const v=el.dataset.v,a=el.dataset.act;
+if(a==='lang')S.lang=S.lang==='en'?'ar':'en';
+else if(a==='tab'){S.tab=v;S.look=null;S.done=null;S.qres=undefined}
+else if(a==='g')S.g=v;
+else if(a==='look'){reset();S.look=LOOKS.find(l=>l.id==el.dataset.id)}
+else if(a==='close')reset();
+else if(a==='prov'){S.prov=PROV.find(p=>p.id==el.dataset.id);S.time=null}
+else if(a==='date'){S.date=v;S.time=null}
+else if(a==='time')S.time=v;
+else if(a==='finish'){S.done=null;S.tab='home'}
+else if(a==='find'){const c=S.q.trim().toUpperCase();S.qres=S.bookings.find(b=>b.code===c)||null}
+else if(a==='cancel'){const b=S.bookings.find(x=>x.code===v);if(b){b.status='cancelled';save();S.qres=undefined;toast(t().cancelled);return}}
+else if(a==='submit'){const f=S.form;S.errs={name:f.name.trim().length<2,phone:f.phone.replace(/\D/g,'').length<8,pick:!S.date||!S.time};
+if(Object.values(S.errs).some(Boolean)){render();return}
+S.busy=true;render();
+try{const b=await api.createBooking({code:code(),lookId:S.look.id,provId:S.prov.id,date:S.date,time:S.time,name:f.name.trim(),phone:f.phone.trim(),notes:f.notes.trim(),status:'pending'});S.bookings.unshift(b);save();S.done=b;reset()}catch(x){S.errs={api:true};S.busy=false}}
+render()});
+render();setTimeout(()=>{S.splash=false;render()},1600);
+</script>
+</body>
+</html>
